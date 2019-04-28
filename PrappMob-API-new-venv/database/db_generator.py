@@ -1,4 +1,4 @@
-from Database.db_model import Workstation, Sensor, Sample, _get_date
+from .db_model import Workstation, Sensor, Sample, _get_date
 from playhouse.shortcuts import model_to_dict
 
 

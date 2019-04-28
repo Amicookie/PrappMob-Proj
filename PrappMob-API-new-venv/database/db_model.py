@@ -1,6 +1,7 @@
 import datetime
+#from app import prappmob_db
 from app import prappmob_db
-from peewee import *
+from peewee import Model, AutoField, CharField, TextField, SmallIntegerField, FloatField, DateTimeField
 
 
 def _get_date():
