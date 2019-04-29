@@ -43,7 +43,7 @@ def hello_world():
 
 class WorkstationList(Resource):
     def get(self):
-        from database.db_generator import get_all_workstations
+        from database.db_methods import get_all_workstations
         print(str(get_all_workstations()))
         return jsonify(get_all_workstations())
 
@@ -66,7 +66,7 @@ class OneWorkstation(Resource):
 
 class SensorList(Resource):
     def get(self):
-        from database.db_generator import get_all_sensors
+        from database.db_methods import get_all_sensors
         print(str(get_all_sensors()))
         return jsonify(get_all_sensors())
 
@@ -89,7 +89,7 @@ class OneSensor(Resource):
 
 class SampleList(Resource):
     def get(self):
-        from database.db_generator import get_all_samples
+        from database.db_methods import get_all_samples
         print(str(get_all_samples()))
         return jsonify(get_all_samples())
             #get_all_samples()
