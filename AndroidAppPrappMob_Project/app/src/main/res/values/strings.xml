@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AndroidApp-PrappMob_Project</string>
+    <string name="read_button">READ</string>
+    <string name="save_button">SAVE</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_items">No items match for this criteria</string>
+</resources>
