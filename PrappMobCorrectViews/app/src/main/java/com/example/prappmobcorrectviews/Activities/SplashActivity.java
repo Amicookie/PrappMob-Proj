@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
     public static List<Sensor> sensorList;
     public static List<Sample> sampleList;
 
-    public static final String url = "http://192.168.0.23:5000";
+    public static final String url = "http://192.168.43.160:5000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

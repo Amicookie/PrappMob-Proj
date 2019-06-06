@@ -2,6 +2,7 @@ package com.example.prappmobcorrectviews.Notification;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -43,7 +44,7 @@ public class NewSampleAddedNotification {
      *
      * @see #cancel(Context)
      */
-    public static void notify(final Context context,
+    public static void showNotify(final Context context,
                               final String exampleString, final int number) {
         final Resources res = context.getResources();
 
@@ -58,6 +59,13 @@ public class NewSampleAddedNotification {
         final String text = res.getString(
                 R.string.new_sample_added_notification_placeholder_text_template, exampleString);
 
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        String id = "my_channel_01";
+        String name = "dupa";
+        int importance = NotificationManager.IMPORTANCE_LOW;
+        NotificationChannel mChannel = new NotificationChannel(id, name,importance);
+        mChannel.enableLights(true);
+        notificationManager.createNotificationChannel(mChannel);
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
 
                 // Set appropriate defaults for the notification light, sound,
@@ -86,6 +94,8 @@ public class NewSampleAddedNotification {
                 // Show a number. This is useful when stacking notifications of
                 // a single type.
                 .setNumber(number)
+
+                .setChannelId(id)
 
                 // If this notification relates to a past or upcoming event, you
                 // should set the relevant time information using the setWhen
@@ -149,10 +159,6 @@ public class NewSampleAddedNotification {
         }
     }
 
-    /**
-     * Cancels any notifications of this type previously shown using
-     * {@link #notify(Context, String, int)}.
-     */
     @TargetApi(Build.VERSION_CODES.ECLAIR)
     public static void cancel(final Context context) {
         final NotificationManager nm = (NotificationManager) context

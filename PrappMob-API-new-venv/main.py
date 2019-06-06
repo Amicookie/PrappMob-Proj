@@ -11,5 +11,5 @@ if __name__ == '__main__':
         insert_data()
         get_all_workstations()
     #app.run(host="192.168.0.23", port=5000, debug=True)
-    socketio.run(app, host="192.168.0.23", port=5000, debug=True)
+    socketio.run(app, host="192.168.43.160", port=5000, debug=True)
     # socketio.run(app, port=5000, debug=True)

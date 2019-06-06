@@ -30,6 +30,8 @@
     <string name="text_select_workstation">Workstation:</string>
     <string name="text_select_sensor">Sensor</string>
     <string name="enter_lab_label">Enter Lab</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 
 </resources>

@@ -24,6 +24,7 @@ import com.example.prappmobcorrectviews.Classes.DatabaseClasses.Sample;
 import com.example.prappmobcorrectviews.Classes.DatabaseClasses.Sensor;
 import com.example.prappmobcorrectviews.Classes.Filter;
 import com.example.prappmobcorrectviews.Fragments.FilteredDataFragment;
+import com.example.prappmobcorrectviews.Notification.NewSampleAddedNotification;
 import com.example.prappmobcorrectviews.R;
 import com.example.prappmobcorrectviews.Classes.DatabaseClasses.Workstation;
 
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         mShowFilterDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                NewSampleAddedNotification.showNotify(MainActivity.this,"dupa",69);
                 AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.fragment_filter_pop_up, null);
 
