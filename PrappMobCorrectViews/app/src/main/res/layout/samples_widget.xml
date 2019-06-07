@@ -5,21 +5,23 @@
     android:padding="@dimen/widget_margin">
 
     <TextView
-        android:id="@+id/appwidget_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_margin="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="349dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#09C"
-        android:contentDescription="@string/appwidget_text"
-        android:text="@string/appwidget_text"
-        android:textColor="#ffffff"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
+        android:id="@+id/item1"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:text="item1" />
 
+    <TextView
+        android:id="@+id/item2"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/item1"
+        android:layout_marginTop="1dp"
+        android:text="item2" />
+
+    <TextView
+        android:id="@+id/item3"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/item2"
+        android:text="item3" />
 </RelativeLayout>
