@@ -45,7 +45,7 @@ export class SampleService {
 
                     // COMPLETED
                       () => {
-                        self.websocketservice.emitEventOnSampleSaved(value, timestamp, sensor_id);
+                        self.websocketservice.emitEventOnSampleSaved(String(value), String(timestamp), String(sensor_id));
 
                         //showToast("File: "+file_name+" saved!");
                         // add new file to file component and refresh

@@ -8,11 +8,6 @@ import { Socket } from 'ng6-socket-io';
 @Injectable({
   providedIn: 'root'
 })
-
-
-@Injectable({
-  providedIn: 'root'
-})
 export class WebsocketService {
 
   private socket;
@@ -23,34 +18,43 @@ export class WebsocketService {
     this.socket.disconnect();
   }
 
-  connect(): Subject<MessageEvent>{
+  connect(): Subject<MessageEvent> {
     this.socket = io.connect(environment.ws_url);
-    
+
+    // We define our observable which will observe any incoming messages
+    // from our socket.io server.
+
     let observable = new Observable(observer => {
+      this.socket.on('message', (data) => {
+        console.log("Received message from Websocket Server")
+        observer.next(data);
+      })
 
       // Zapisanie sample
-      this.socket.on('sampleSaved', (data)=>{
+      this.socket.on('sampleSaved', (data) => {
         showToast('New Sample added on sensor ' + data.sensor_id + '!');
       })
 
-      return() => {
+      return () => {
         this.socket.disconnect();
       }
-    })
+    });
+
+    // We define our Observer which will listen to messages
+    // from our other components and send messages back to our
+    // socket server whenever the `next()` method is called.
 
     let observer = {
       next: (data: Object) => {
         this.socket.emit('chat', JSON.stringify(data));
       },
     }
-    return Subject.create(observer,observable);
+
+    return Subject.create(observer, observable);
   }
 
-
-  //obsługa eventów
-
   // Sockets -----
-  emitEventOnSampleSaved(value, timestamp, sensor_id){
+  emitEventOnSampleSaved(value, timestamp, sensor_id) {
     this.socket.emit('sampleSaved', JSON.stringify({value, timestamp, sensor_id}));
   }
 

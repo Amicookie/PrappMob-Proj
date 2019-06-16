@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  ws_url: 'http://192.168.1.106:5000/'
+  ws_url: 'http://prappmob-api.herokuapp.com/'
 };
 
 /*
