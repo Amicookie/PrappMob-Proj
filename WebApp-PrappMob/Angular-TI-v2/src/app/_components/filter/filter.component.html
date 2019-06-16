@@ -11,19 +11,19 @@
               <div class="divTableRow">
                 <div class="divTableCell">Date From: </div>
                 <div class="divTableCell">
-                  <input type="datetime-local" name="sampleTimestamp" [(ngModel)]="sample_timestamp_dateFrom" />
+                  <input type="datetime-local" class="inputCredentials" name="sampleTimestamp" [(ngModel)]="sample_timestamp_dateFrom" />
                 </div>
               </div>
               <div class="divTableRow">
                 <div class="divTableCell">Date To: </div>
                 <div class="divTableCell">
-                  <input type="datetime-local" name="sampleTimestamp" [(ngModel)]="sample_timestamp_dateTo" />
+                  <input type="datetime-local" class="inputCredentials" name="sampleTimestamp" [(ngModel)]="sample_timestamp_dateTo" />
                 </div>
               </div>
               <div class="divTableRow">
                 <div class="divTableCell">Workstation: </div>
                 <div class="divTableCell">
-                  <select [(ngModel)]="selectedWorkstation" name="workstation_id_filter">
+                  <select class="selectElements" [(ngModel)]="selectedWorkstation" name="workstation_id_filter">
                     <option></option>
                     <option [ngValue]="workstation.station_id" *ngFor="let workstation of workstations">
                       {{workstation.station_name}}</option>
@@ -33,9 +33,9 @@
               <div class="divTableRow">
                 <div class="divTableCell">Sensor: </div>
                 <div class="divTableCell">
-                  <select [(ngModel)]="selectedSensor" name="sensor_id_filter">
+                  <select class="selectElements"  [(ngModel)]="selectedSensor" name="sensor_id_filter">
                     <option></option>
-                    <option  *ngFor="let sensor of sensors" [ngValue]="sensor.sensor_id">{{sensor.sensor_name}}</option>
+                    <option *ngFor="let sensor of sensors" [ngValue]="sensor.sensor_id">{{sensor.sensor_name}}</option>
                   </select>
                 </div>
               </div>
@@ -44,7 +44,8 @@
 
           <br>
           <button class="btn"
-            (click)="filterSamples(sample_timestamp_dateFrom, sample_timestamp_dateTo, selectedWorkstation, selectedSensor)">FILTER</button><br>
+            (click)="filterSamples(sample_timestamp_dateFrom, sample_timestamp_dateTo, selectedWorkstation, selectedSensor)">FILTER</button>
+          <br>
 
         </div>
       </div>
@@ -75,13 +76,13 @@
                 </div>
               </div>
             </div>
+            <br>
+            <button class="btn back" (click)="backToFilterView()">Back</button><br>
 
           </div>
         </div>
       </div>
-      <br>
-      <button class="btn back" (click)="backToFilterView()">Back</button><br>
 
     </div>
-</section>
+  </section>
 </div>

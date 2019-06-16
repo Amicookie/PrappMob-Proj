@@ -19,6 +19,7 @@ export class SampleComponent implements OnInit {
   sensor_id = -1;
 
   _navigateToSamples = false;
+  value_entered = false;
 
   constructor(private _sampleService: SampleService,
     private webSocketService: WebsocketService,
@@ -56,8 +57,12 @@ export class SampleComponent implements OnInit {
 
 
   addSample(sample_value_input, sample_timestamp_input = null){
-    this._sampleService.createSample(sample_value_input, sample_timestamp_input, localStorage.getItem('sensor_id'));
-    //wyczyść zawartość textarea jeśli utworzono xd
+    if(sample_value_input == null) {
+      this.value_entered = true;
+    } else {
+      this._sampleService.createSample(sample_value_input, sample_timestamp_input, localStorage.getItem('sensor_id'));
+      this.value_entered = false;
+    }//wyczyść zawartość textarea jeśli utworzono xd
 
   }
 

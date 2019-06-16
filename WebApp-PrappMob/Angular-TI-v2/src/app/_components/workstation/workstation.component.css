@@ -5,6 +5,8 @@
     background-color: white;
   }
   
+
+  
   /* Full-width textarea */
   .form-container textarea.fileName {
     width: 100%;
@@ -14,6 +16,20 @@
     background: #f1f1f1;
     resize: none;
     min-height: 50px;
+  }
+
+  .form-container select.selectElements {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    resize: none;
+  }
+
+  .form-container select:focus {
+    background-color: #ddd;
+    outline: none;
   }
   
   .form-container input.inputCredentials {

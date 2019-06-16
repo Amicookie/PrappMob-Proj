@@ -46,12 +46,24 @@
             </div>
             <div class="divTableRow">
               <div class="divTableCell">
-                <input type="number" placeholder="Value" class="fileName" name="sampleValue"
+                <input type="number" placeholder="Value" class="inputCredentials" name="sampleValue"
                   [(ngModel)]="sample_value_input" required />
               </div>
               <div class="divTableCell">
-                <input type="datetime-local" placeholder="Timestamp" class="fileName" name="sampleTimestamp"
+                <input type="datetime-local" placeholder="Timestamp" class="inputCredentials" name="sampleTimestamp"
                   [(ngModel)]="sample_timestamp_input" required />
+              </div>
+            </div>
+            <div *ngIf="value_entered" class="divTableRow">
+              <div class="divTableCell">
+                  <div class="alert alert-danger">
+                    Value is required.
+                  </div>
+              </div>
+              <div class="divTableCell">
+                  <div class="alert alert-danger">
+                    If left null, timestamp will be set to current date.
+                  </div>
               </div>
             </div>
           </div>
