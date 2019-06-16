@@ -47,45 +47,11 @@ export class WebsocketService {
   }
 
 
-   //obsługa eventów
-
-  emitEventOnChatMessageSent(username, message){
-
-    //this.socket.emit('chat', {username, message});
-  }
-
+  //obsługa eventów
 
   // Sockets -----
   emitEventOnSampleSaved(value, timestamp, sensor_id){
     this.socket.emit('sampleSaved', JSON.stringify({value, timestamp, sensor_id}));
-  }
-
-
-
-  // OLD 
-  emitEventOnFileSaved(username, file_name) {
-    this.socket.emit('fileSaved', JSON.stringify({username, file_name}));
-  }
-
-  emitEventOnFileLocked(user_id, username, file_name, file_id){
-    this.socket.emit('fileLocked', JSON.stringify({user_id, username, file_name, file_id}));
-  }
-
-  
-  emitEventOnFileUnlocked(username, file_name, file_id, user_id){
-    this.socket.emit('fileUnlocked', JSON.stringify({username, file_name, file_id, user_id}));
-  }
-
-  emitEventOnFileUpdated(file_name, username){
-    this.socket.emit('fileUpdated', JSON.stringify({file_name, username}));
-  }
-
-  emitEventFileDeletion(file_id, file_name, username){
-    this.socket.emit('fileDeletion', JSON.stringify({file_id, file_name, username}));
-  }
-
-  emitSocketClientTypeConnected(user_id) {
-    this.socket.emit('socketConnectionTypeHelper', JSON.stringify({user_id}));
   }
 
 }

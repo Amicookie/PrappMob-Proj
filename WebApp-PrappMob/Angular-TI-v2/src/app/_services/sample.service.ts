@@ -40,7 +40,7 @@ export class SampleService {
                     },
                       error => {
                       console.log("Error", error);
-                      showToast("An error: "+ error.name +" occurred while adding your file, please try again!");
+                      showToast("An error: "+ error.name +" occurred while adding your sample, please try again!");
                     },
 
                     // COMPLETED
@@ -53,6 +53,14 @@ export class SampleService {
                     );
   }
 
+  filterSamples(dateFrom, dateTo, workstation_id, sensor_id) : Observable<ISample[]>{
+    const self = this;
+    let encoded_data = JSON.stringify({dateFrom, dateTo, workstation_id, sensor_id});
+    console.log(encoded_data);
+    let headers = new HttpHeaders().set("Content-Type", "application/json;charset=utf-8");
+    
+    return this.http.post<ISample[]>(environment.ws_url + "filter", encoded_data, {headers});
+  }
 
 
   errorHandler(error: HttpErrorResponse) {

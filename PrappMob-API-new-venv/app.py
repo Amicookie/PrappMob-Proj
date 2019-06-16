@@ -1,12 +1,13 @@
 import os
-from flask import Flask, g, session, request, flash
-from peewee import *
+from ast import literal_eval
+from threading import Lock, Thread, Event
+
+from flask import Flask, g, request
+from flask_cors import CORS
 from flask_jsonpify import jsonify
 from flask_restful import Resource, Api
-from flask_cors import CORS
-from threading import Lock, Thread, Event
-from flask_socketio import SocketIO, emit, join_room, leave_room, close_room, rooms, disconnect, send
-from ast import literal_eval
+from flask_socketio import SocketIO
+from peewee import *
 
 async_mode = None
 
@@ -25,6 +26,7 @@ socketio = SocketIO(app)  # async_mode=async_mode)
 thread = Thread()
 thread_stop_event = Event()
 thread_lock = Lock()
+
 
 #
 # # SOCKET.IO HANDLERS
@@ -75,6 +77,7 @@ def after_request(response):
 
 @app.route('/')
 def hello_world():
+    print('Hello World!')
     return 'Hello World!'
 
 
@@ -133,6 +136,8 @@ class SampleList(Resource):
     def post(self):
         from Database.db_methods import create_sample
         from Database.db_generator import get_all_samples
+        text = "Request.Data: " + str(request.data) + "Request.Json: " + str(request.json)
+        print(text)  # To check what you are sending
         create_sample(request.json['value'], request.json['sensor_id'], request.json['timestamp'])
         return jsonify(get_all_samples()[-1])
 
@@ -150,16 +155,29 @@ class OneSample(Resource):
         return
 
 
-class SensorsByStations (Resource):
+class SensorsByStations(Resource):
     def get(self, station_id):
         from Database.db_methods import get_sensor_by_station
         return jsonify(get_sensor_by_station(station_id))
 
 
-class SamplesBySensors (Resource):
+class SamplesBySensors(Resource):
     def get(self, sensor_id):
         from Database.db_methods import get_sample_by_sensor
         return jsonify(get_sample_by_sensor(sensor_id))
+
+
+class FilterSamples(Resource):
+    def post(self):
+        from Database.db_methods import filter_samples
+
+        text = "Request.Json: " + str(request.json)
+        print(text)  # To check what you are sending
+
+        return jsonify(filter_samples(request.json['dateFrom'],
+                                      request.json['dateTo'],
+                                      request.json['workstation_id'],
+                                      request.json['sensor_id']))
 
 
 Api(app).add_resource(WorkstationList, '/workstations')  # Route_1
@@ -168,7 +186,6 @@ Api(app).add_resource(SampleList, '/samples')  # Route_3
 Api(app).add_resource(OneWorkstation, '/workstations/<station_id>')  # Route_4
 # Api(app).add_resource(OneSensor, '/sensors/<sensor_id>')  # Route_5
 # Api(app).add_resource(OneSample, '/samples/<sample_id>')  # Route_6
-Api(app).add_resource(SensorsByStations, '/sensors/<station_id>')  # Route_6
+Api(app).add_resource(SensorsByStations, '/sensors/<station_id>')  # Route_5
 Api(app).add_resource(SamplesBySensors, '/samples/<sensor_id>')  # Route_6
-
-
+Api(app).add_resource(FilterSamples, '/filter')  # Route_7

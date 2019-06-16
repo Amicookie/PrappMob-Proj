@@ -4,7 +4,7 @@ from peewee import *
 
 
 def _get_date():
-    return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return datetime.datetime.now().strftime("%Y-%m-%dT%H:%M")
 
 
 class base_model(Model):

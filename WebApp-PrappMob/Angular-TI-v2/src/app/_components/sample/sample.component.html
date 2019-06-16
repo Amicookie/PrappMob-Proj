@@ -1,7 +1,7 @@
-<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="#Browse">
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="browse">
   <div class="my-auto">
-    <h2 class="mb-5">Workstation selected: {{workstation_name}} <img src="../../../../assets/img/workstation.svg"
-        width="25px" height="25px" /></h2>
+    <h3 class="mb-5">Workstation selected: {{workstation_name}} <img src="../../../../assets/img/workstation.svg"
+        width="25px" height="25px" /></h3>
     <h3 class="mb-5">Sensor selected: {{sensor_name}} <img src="../../../../assets/img/smoke-detector.svg" width="25px"
         height="25px" /></h3>
     <h4 class="mb-5">Samples:</h4>
@@ -12,41 +12,53 @@
             <div class="divTableRow">
               <div class="divTableCell"><b>Value</b></div>
               <div class="divTableCell"><b>Timestamp</b></div>
-              <div class="divTableCell"><b>View</b></div>
+              <div class="divTableCell"></div>
             </div>
             <div *ngFor="let sample of samples" class="divTableRow">
               <div class="divTableCell">{{sample.value}}</div>
               <div class="divTableCell">{{sample.timestamp}}</div>
-              <div class="divTableCell"><a (click)="navigateToSamples(sensor.sensor_id, sensor.sensor_name)"><img
-                    src="../../../assets/img/test-tube.svg" width="25px" height="25px"></a></div>
+              <div class="divTableCell"><img
+                    src="../../../assets/img/test-tube.svg" width="25px" height="25px"></div>
             </div>
           </div>
         </div>
-
+        <br><br>
+        <button class="btn back" (click)="backToSensors()" >BACK</button>
       </div>
     </div>
   </div>
 </section>
 
 
+
 <hr class="m-0">
 
-<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="#addSample">
+<section class="resume-section p-3 p-lg-5 d-flex flex-column" id="addSample">
   <div class="my-auto">
     <h2 class="mb-5">Add new sample</h2>
     <div class="resume-content mr-auto">
       <div class="form-container">
-        <!--<h1>Edit</h1>-->
-        Sample value: 
-        <input type="number" placeholder="Value" class="fileName" name="sampleValue" [(ngModel)]="sample_value_input"
-          required />
-        <br>
-        Sample timestamp: 
-        <input type="datetime-local" placeholder="Timestamp" class="fileName" name="sampleTimestamp" [(ngModel)]="sample_timestamp_input"
-          required />
+        <div class="divTable blueTable">
+          <div class="divTableBody">
+            <div class="divTableRow">
+              <div class="divTableCell">Sample value: </div>
+              <div class="divTableCell">Sample timestamp:</div>
+            </div>
+            <div class="divTableRow">
+              <div class="divTableCell">
+                <input type="number" placeholder="Value" class="fileName" name="sampleValue"
+                  [(ngModel)]="sample_value_input" required />
+              </div>
+              <div class="divTableCell">
+                <input type="datetime-local" placeholder="Timestamp" class="fileName" name="sampleTimestamp"
+                  [(ngModel)]="sample_timestamp_input" required />
+              </div>
+            </div>
+          </div>
+        </div>
         <br><br>
         <button class="btn" (click)="addSample(sample_value_input, sample_timestamp_input)">SAVE</button><br>
-        <button class="btn back" (click)="backToSensors()" >BACK</button>
+        <button class="btn back" (click)="backToSensors()">BACK</button>
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@ import { ISensor } from 'src/app/_models/sensor';
 @Component({
   selector: 'app-sensor',
   templateUrl: './sensor.component.html',
-  styleUrls: ['./sensor.component.css', '../workstation/workstation.component.css']
+  styleUrls: ['./sensor.component.css', '../workstation/workstation.component.css', '../../app.component.css']
 })
 export class SensorComponent implements OnInit {
 

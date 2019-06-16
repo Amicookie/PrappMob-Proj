@@ -6,7 +6,7 @@ import { DataSharingService } from 'src/app/_services/data-sharing.service';
 @Component({
   selector: 'app-sample',
   templateUrl: './sample.component.html',
-  styleUrls: ['./sample.component.css', '../workstation/workstation.component.css']
+  styleUrls: ['./sample.component.css', '../workstation/workstation.component.css', '../../app.component.css']
 })
 export class SampleComponent implements OnInit {
 
@@ -55,7 +55,7 @@ export class SampleComponent implements OnInit {
   }
 
 
-  addSample(sample_value_input, sample_timestamp_input){
+  addSample(sample_value_input, sample_timestamp_input = null){
     this._sampleService.createSample(sample_value_input, sample_timestamp_input, localStorage.getItem('sensor_id'));
     //wyczyść zawartość textarea jeśli utworzono xd
 

@@ -6,7 +6,7 @@ import { DataSharingService } from 'src/app/_services/data-sharing.service';
 @Component({
   selector: 'app-workstation',
   templateUrl: './workstation.component.html',
-  styleUrls: ['./workstation.component.css']
+  styleUrls: ['./workstation.component.css', '../../app.component.css']
 })
 export class WorkstationComponent implements OnInit {
 
@@ -19,29 +19,36 @@ export class WorkstationComponent implements OnInit {
   clicked_station_id = -1;
 
   _navigateToSensors = false;
+  public _connectionToDB = false;
 
 
   constructor(private _workstationService: WorkstationService,
     private webSocketService: WebsocketService,
     private dataSharingService: DataSharingService) {
 
-      this.dataSharingService.isWorkstationSelected.subscribe(
-        value=>{
-          this._navigateToSensors = value;
-        }
-      )
+    this.dataSharingService.isWorkstationSelected.subscribe(
+      value => {
+        this._navigateToSensors = value;
+      }
+    )
 
 
-     }
+  }
 
   ngOnInit() {
     this._workstationService.getWorkstations()
-    .subscribe(data => this.workstations = data,
-                error => this.errorMsg = error);
+      .subscribe(data => {
+        this.workstations = data;
+        this._connectionToDB = true;
+      },
+        error => {
+          this.errorMsg = error;
+          this._connectionToDB = false;
+        });
   }
 
 
-  navigateToSensors(station_id, station_name){
+  navigateToSensors(station_id, station_name) {
     this.clicked_station_id = station_id;
     this.clicked_station_name = station_name;
     this._navigateToSensors = true;

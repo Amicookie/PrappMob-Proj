@@ -1,5 +1,0 @@
-peewee
-Flask-Cors
-Flask-Jsonpify
-Flask-RESTFul
-Flask-SocketIO

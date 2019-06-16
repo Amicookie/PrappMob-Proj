@@ -17,13 +17,15 @@ import { LayoutComponent } from './_components/ui/layout/layout.component';
 import { WorkstationComponent } from './_components/workstation/workstation.component';
 import { SampleComponent } from './_components/sample/sample.component';
 import { SensorComponent } from './_components/sensor/sensor.component';
+import { FilterComponent } from './_components/filter/filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WorkstationComponent,
     SampleComponent,
-    SensorComponent
+    SensorComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
