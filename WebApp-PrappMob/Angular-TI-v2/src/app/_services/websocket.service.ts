@@ -36,6 +36,13 @@ export class WebsocketService {
       // Zapisanie sample
       this.socket.on('sampleSaved', (data) => {
         showToast('New Sample added on sensor ' + data.sensor_id + '!');
+        var newSampleAddedInfo = document.getElementById("newSampleAddedInfo");
+        newSampleAddedInfo.style.visibility='visible' 
+        newSampleAddedInfo.innerHTML = '<center><strong>New Sample added on sensor '+data.sensor_id+'</strong>!</center>';
+        setTimeout(function(){ 
+          newSampleAddedInfo.innerHTML = "";
+          newSampleAddedInfo.style.visibility='hidden'; 
+        }, 10000);
         this._sample_added.next({sensor_id: data.sensor_id});
 
       })
