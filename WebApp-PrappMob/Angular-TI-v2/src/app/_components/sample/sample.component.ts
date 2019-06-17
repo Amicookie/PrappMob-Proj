@@ -18,6 +18,8 @@ export class SampleComponent implements OnInit {
   sensor_name = "";
   sensor_id = -1;
 
+
+
   _navigateToSamples = false;
   value_entered = false;
 
@@ -28,6 +30,29 @@ export class SampleComponent implements OnInit {
       this.dataSharingService.isSensorSelected.subscribe(
         value=>{
           this._navigateToSamples = value;
+        }
+      )
+
+      this.webSocketService._sample_added.subscribe(
+        value => {
+          if (value.sensor_id !== -1) {
+  
+            console.log('weszlo do ifa');
+            console.log('value.sample_id' + value.sensor_id);
+
+            this._sampleService.getSamplesBySensors(value.sensor_id)
+            .subscribe(data => this.samples = data);
+            
+            // 
+            // if(this.samples[this.samples.length-1].file_last_editor_id == localStorage.getItem('user_id')){
+            //    this.file_new_name_input = "";
+            //     this.file_new_content_input = "";
+            // }
+
+            this.webSocketService._sample_added.next({sensor_id: -1});
+            console.log('wartosc sample_added po .next(-1)'+value);
+  
+          }
         }
       )
 

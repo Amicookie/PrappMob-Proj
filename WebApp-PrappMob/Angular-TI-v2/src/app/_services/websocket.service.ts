@@ -12,6 +12,9 @@ export class WebsocketService {
 
   private socket;
 
+  public _sample_added: BehaviorSubject<any> = new BehaviorSubject({sensor_id: -1});
+
+
   constructor() { }
 
   close() {
@@ -33,6 +36,8 @@ export class WebsocketService {
       // Zapisanie sample
       this.socket.on('sampleSaved', (data) => {
         showToast('New Sample added on sensor ' + data.sensor_id + '!');
+        this._sample_added.next({sensor_id: data.sensor_id});
+
       })
 
       return () => {
