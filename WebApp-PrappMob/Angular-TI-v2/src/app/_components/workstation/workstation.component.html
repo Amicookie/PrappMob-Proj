@@ -1,0 +1,44 @@
+<hr class="m-0">
+<div *ngIf="_navigateToSensors">
+  <app-sensor></app-sensor>
+</div>
+
+<div *ngIf="!_navigateToSensors && _connectionToDB">
+  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="browse">
+  <div class="w-100">
+    <div class="my-auto">
+      <h2 class="mb-5">Workstations</h2>
+      <div class="resume-content mr-auto">
+        <div class="form-container">
+          <div class="divTable blueTable">
+            <div class="divTableBody">
+              <div class="divTableRow">
+                <div class="divTableCell"><b>Name</b></div>
+                <div class="divTableCell"><b>Description</b></div>
+                <div class="divTableCell"><b>View</b></div>
+              </div>
+              <div *ngFor="let workstation of workstations" class="divTableRow">
+                <div class="divTableCell">{{workstation.station_name}}</div>
+                <div class="divTableCell">{{workstation.station_description}}</div>
+                <div class="divTableCell"><a
+                    (click)="navigateToSensors(workstation.station_id, workstation.station_name)"><img
+                      src="../../../assets/img/workstation.svg" width="25px" height="25px"></a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </section>
+  </div>
+
+<div *ngIf="!_connectionToDB">
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="browse">
+  <div class="my-auto">
+    <h2 class="mb-5">
+      Connection to server not established.<br>
+      Please try again later.</h2>
+  </div>
+  </section>
+</div>

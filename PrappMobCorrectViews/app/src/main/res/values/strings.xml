@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">PrappMobCorrectViews</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- ADD NEW SAMPLE STRINGS -->
+    <string name="save_sample_number">Insert value</string>
+    <string name="save_sample_timestamp">Insert date</string>
+    <string name="save_sample_button">Add new sample!</string>
+    <string name="back_button">Back</string>
+
+    <string name="new_sample_added_notification_title">New sample added: %1$s</string>
+
+    <!-- TODO: remove this placeholder text -->
+    <string name="new_sample_added_notification_text">Sample %1$s added to Sensor %2$s!
+    </string>
+
+    <string name="action_share">Share</string>
+    <string name="action_reply">Reply</string>
+    <string name="buttonFilter">Filter</string>
+    <string name="button_filter_popup">Filter Samples</string>
+    <string name="text_date_from">Date from:</string>
+    <string name="text_date_to">Date to:</string>
+    <string name="text_select_workstation">Workstation:</string>
+    <string name="text_select_sensor">Sensor</string>
+    <string name="enter_lab_label">Enter Lab</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="data_was_not_found">Data was not found.</string>
+    <string name="alertValue">Value is required.</string>
+    <string name="alertTimestamp">If null, timestamp will be set to current date.</string>
+    <string name="add_sample">Add sample</string>
+
+
+</resources>

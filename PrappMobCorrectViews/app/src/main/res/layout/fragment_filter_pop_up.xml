@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:stretchColumns="*"
+    android:padding="5dp">
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/text_date_from" />
+
+        <TextView
+            android:id="@+id/dateFrom_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:visibility="invisible"
+            android:text=""/>
+
+        <Button
+            android:id="@+id/insertDateFrom_icon"
+            android:background="@android:color/transparent"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:padding="5dp" />
+
+    </TableRow>
+
+
+    <TableRow>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/text_date_to" />
+
+        <TextView
+            android:id="@+id/dateTo_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:visibility="invisible"
+            android:text=""/>
+
+        <Button
+            android:id="@+id/insertDateTo_icon"
+            android:background="@android:color/transparent"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:padding="5dp" />
+
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_select_workstation" />
+
+        <Spinner
+            android:id="@+id/workstation_input"
+            android:layout_span="2"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableRow>
+
+        <TextView
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_select_sensor" />
+
+        <Spinner
+            android:id="@+id/sensor_input"
+            android:layout_span="2"
+
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+
+    <TableRow>
+
+        <Button
+            android:layout_span="3"
+            android:id="@+id/filterButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonFilter" />
+    </TableRow>
+
+
+</TableLayout>

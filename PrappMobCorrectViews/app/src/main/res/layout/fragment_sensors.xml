@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="5dip"-->
+    <!--android:fillViewport="true"-->
+    <!--android:scrollbarStyle="outsideInset"-->
+    <!--android:scrollbars="vertical"-->
+    <!--tools:context=".Fragments.SensorsFragment">-->
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".Fragments.SensorsFragment">
+
+        <TableLayout
+            android:id="@+id/sensorsTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+
+        </TableLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/back_button_sensor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back_button"
+            android:onClick="handleBackButton"/>
+
+    </LinearLayout>
+<!--</ScrollView>-->

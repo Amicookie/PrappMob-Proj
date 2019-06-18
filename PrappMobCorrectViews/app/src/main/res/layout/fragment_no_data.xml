@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/fragment_no_data"
+    android:orientation="vertical"
+    tools:context=".Fragments.NoDataFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:drawableTop="@drawable/ic_folder"
+        android:text="@string/data_was_not_found"/>
+
+</LinearLayout>

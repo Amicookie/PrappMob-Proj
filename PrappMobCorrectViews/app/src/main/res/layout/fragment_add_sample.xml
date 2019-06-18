@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".Fragments.AddSampleFragment">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_sample"
+        android:ems="10"
+        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textAllCaps="true"/>
+
+    <EditText
+        android:id="@+id/SaveSample_Number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:ems="10"
+        android:autofillHints=""
+        android:hint="@string/save_sample_number"
+        android:inputType="number|numberDecimal" />
+
+    <TextView
+        android:id="@+id/alertValue"
+        android:padding="8dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textColor="#FF0000"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        />
+
+    <EditText
+        android:id="@+id/SaveSample_Timestamp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:inputType=""
+        android:ems="10"
+        android:padding="8dp"
+        android:hint="@string/save_sample_timestamp" />
+
+    <TextView
+        android:id="@+id/alertTimestamp"
+        android:padding="8dp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:textColor="#FF0000"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        />
+
+
+    <Button
+        android:id="@+id/SaveSample_Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/save_sample_button"
+        android:onClick="sendRESTPostRequest"/>
+</LinearLayout>
