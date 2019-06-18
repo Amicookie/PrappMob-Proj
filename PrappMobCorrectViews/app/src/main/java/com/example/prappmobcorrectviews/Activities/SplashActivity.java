@@ -48,7 +48,7 @@ public class SplashActivity extends AppCompatActivity {
 
     public static boolean isDataDownloadedFromServer;
 
-    public static final String url = "http://192.168.1.13:5000";
+    public static final String url = "http://prappmob-api.herokuapp.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
