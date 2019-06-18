@@ -20,6 +20,7 @@ import java.util.List;
 
 import static android.R.color.transparent;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+import static com.example.prappmobcorrectviews.Activities.MainActivity.samplesListForSensor;
 import static com.example.prappmobcorrectviews.Activities.SplashActivity.sampleList;
 import static com.example.prappmobcorrectviews.Activities.SplashActivity.sensorList;
 
@@ -44,15 +45,6 @@ public class SampleFragment extends Fragment {
         final FragmentActivity fragmentActivity = getActivity();
 
         if(returnView!=null){
-//            sensorsListTemp = new ArrayList<>();
-//
-//            for(int i=0; i<7;i++){
-//                sensorsListTemp.add(new Sensor(i, "S"+i, "S"+i+"D", i));
-//            }
-//
-//            for(int i=0; i<sensorsListTemp.size();i++) Log.d("SensorListTemp", sensorsListTemp.get(i).toString());
-
-
             // Inflate the layout for this fragment
             addNewSampleToTableView(returnView, fragmentActivity);
         }
@@ -72,7 +64,7 @@ public class SampleFragment extends Fragment {
 
         List<TableRow> tableRows = new ArrayList<>();
 
-        for(Sample sample: sampleList) {
+        for(Sample sample: samplesListForSensor) {
 
             if(count%3 == 0){
                 TableRow tempTableRow = new TableRow(fragmentActivity);
@@ -86,8 +78,9 @@ public class SampleFragment extends Fragment {
             button.setTag("SampleRow" + count/3 + "Column" + count%3);
             button.setBackgroundResource(transparent);
             button.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_sample, 0 ,0);
-            button.setText("Sample " + sample.getSample_id());
+            button.setText("Sample " + sample.getSample_id() + "\nValue: " + sample.getValue() +"\nTimestamp:\n" + sample.getTimestamp());
             button.setLayoutParams(new TableRow.LayoutParams(count%3));
+            button.setEnabled(false);
 
             //if(count%3==0)
             tableRows.get(tableRows.size()-1).addView(button);
@@ -102,5 +95,9 @@ public class SampleFragment extends Fragment {
 
     }
 
+
+    public void handleBackButton(View view){
+        getActivity().getSupportFragmentManager().popBackStack();
+    }
 
 }

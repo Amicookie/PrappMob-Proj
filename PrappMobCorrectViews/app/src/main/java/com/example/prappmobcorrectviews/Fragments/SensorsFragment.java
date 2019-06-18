@@ -4,6 +4,7 @@ package com.example.prappmobcorrectviews.Fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
 
+import com.example.prappmobcorrectviews.Classes.DatabaseClasses.Sample;
 import com.example.prappmobcorrectviews.Classes.DatabaseClasses.Sensor;
 import com.example.prappmobcorrectviews.R;
 
@@ -21,16 +23,17 @@ import java.util.List;
 
 import static android.R.color.transparent;
 import static android.widget.TableRow.LayoutParams.*;
+import static com.example.prappmobcorrectviews.Activities.MainActivity.samplesListForSensor;
+import static com.example.prappmobcorrectviews.Activities.MainActivity.selectedSensorId;
+import static com.example.prappmobcorrectviews.Activities.MainActivity.selectedWorkstationId;
+import static com.example.prappmobcorrectviews.Activities.MainActivity.sensorsListForWorkstation;
+import static com.example.prappmobcorrectviews.Activities.SplashActivity.sampleList;
 import static com.example.prappmobcorrectviews.Activities.SplashActivity.sensorList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class SensorsFragment extends Fragment {
-
-    // temporary list
-    //private List<Sensor> sensorsListTemp;
-
 
     public SensorsFragment() {
         // Required empty public constructor
@@ -46,14 +49,6 @@ public class SensorsFragment extends Fragment {
         final FragmentActivity fragmentActivity = getActivity();
 
         if(returnView!=null){
-//            sensorsListTemp = new ArrayList<>();
-//
-//            for(int i=0; i<7;i++){
-//                sensorsListTemp.add(new Sensor(i, "S"+i, "S"+i+"D", i));
-//            }
-//
-//            for(int i=0; i<sensorsListTemp.size();i++) Log.d("SensorListTemp", sensorsListTemp.get(i).toString());
-
 
             // Inflate the layout for this fragment
             addNewSensorToTableView(returnView, fragmentActivity);
@@ -64,7 +59,7 @@ public class SensorsFragment extends Fragment {
 
 
 
-    private void addNewSensorToTableView(View returnView, FragmentActivity fragmentActivity){
+    private void addNewSensorToTableView(View returnView, final FragmentActivity fragmentActivity){
 
         // Get reference to sensorsTable
         TableLayout sensorsTable = (TableLayout) returnView.findViewById(R.id.sensorsTable);
@@ -75,7 +70,7 @@ public class SensorsFragment extends Fragment {
 
         List<TableRow> tableRows = new ArrayList<>();
 
-        for(Sensor sensor : sensorList) {
+        for(final Sensor sensor : sensorsListForWorkstation) {
 
             if(count%3 == 0){
                 TableRow tempTableRow = new TableRow(fragmentActivity);
@@ -91,6 +86,38 @@ public class SensorsFragment extends Fragment {
             button.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_sensor, 0 ,0);
             button.setText(sensor.getSensor_name());
             button.setLayoutParams(new LayoutParams(count%3));
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Log.d("OnClickListener", "IN!");
+                    samplesListForSensor = new ArrayList<>();
+
+                    for(Sample sample: sampleList){
+                        if(sample.getSensor_id() == sensor.getSensor_id()) {
+                            samplesListForSensor.add(sample);
+                        }
+                    }
+
+                    Log.d("SamplesListForSensor", samplesListForSensor.toString());
+
+                    selectedSensorId = sensor.getSensor_id();
+
+
+                    FragmentTransaction ft = fragmentActivity.getSupportFragmentManager().beginTransaction();
+
+                    ft.remove(fragmentActivity.getSupportFragmentManager().findFragmentByTag("SENS_FRAG"));
+
+                    SampleFragment sampleFragment = new SampleFragment();
+                    ft.replace(R.id.fragment_visible, sampleFragment, "SAMPLE_FRAG");
+                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                    ft.addToBackStack(null);
+                    ft.commit();
+
+
+                }
+            });
+
 
             //if(count%3==0)
             tableRows.get(tableRows.size()-1).addView(button);
@@ -103,6 +130,10 @@ public class SensorsFragment extends Fragment {
             sensorsTable.addView(tr);
         }
 
+    }
+
+    public void handleBackButton(View view){
+        getActivity().getSupportFragmentManager().popBackStack();
     }
 
 }

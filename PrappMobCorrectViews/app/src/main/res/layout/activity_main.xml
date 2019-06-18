@@ -11,13 +11,12 @@
         android:id="@+id/button_filter_popup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_filter_popup"
-        android:onClick="notify"/>
+        android:text="@string/button_filter_popup" />
 
     <fragment
+        class="com.example.prappmobcorrectviews.Fragments.WorkstationsFragment"
         android:layout_gravity="center"
         android:id="@+id/fragment_visible"
-        class="com.example.prappmobcorrectviews.Fragments.WorkstationsFragment"
         android:layout_width="match_parent"
         android:layout_height="fill_parent" />
 

@@ -1,36 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="wrap_content"
+    android:layout_marginTop="5dip"
+    android:fillViewport="true"
+    android:scrollbarStyle="outsideInset"
+    android:scrollbars="vertical"
     tools:context=".Fragments.SampleFragment">
 
-    <TableLayout
-        android:id="@+id/sampleTable"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="*"
-      >
+        android:orientation="vertical">
+
+        <TableLayout
+            android:id="@+id/sampleTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
 
 
-    </TableLayout>
+        </TableLayout>
 
-    <fragment
-        android:layout_gravity="center"
-        android:id="@+id/fragment_add_sample"
-        class="com.example.prappmobcorrectviews.Fragments.AddSampleFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <fragment
+            android:id="@+id/fragment_add_sample"
+            class="com.example.prappmobcorrectviews.Fragments.AddSampleFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/back_button_sensor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/back_button"
-        />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/back_button_sample"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back_button"
+            android:onClick="handleBackButton"/>
 
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

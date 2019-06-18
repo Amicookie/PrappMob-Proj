@@ -45,7 +45,7 @@ public class NewSampleAddedNotification {
      * @see #cancel(Context)
      */
     public static void showNotify(final Context context,
-                              final String exampleString, final int number) {
+                              final String sampleId, final String sensorId, final int number) {
         final Resources res = context.getResources();
 
         // This image is used as the notification's large icon (thumbnail).
@@ -53,11 +53,11 @@ public class NewSampleAddedNotification {
         final Bitmap picture = BitmapFactory.decodeResource(res, R.drawable.example_picture);
 
 
-        final String ticker = exampleString;
+        final String ticker = sampleId;
         final String title = res.getString(
-                R.string.new_sample_added_notification_title_template, exampleString);
+                R.string.new_sample_added_notification_title, sampleId);
         final String text = res.getString(
-                R.string.new_sample_added_notification_placeholder_text_template, exampleString);
+                R.string.new_sample_added_notification_text, sampleId, sensorId);
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         String id = "my_channel_01";
@@ -120,7 +120,7 @@ public class NewSampleAddedNotification {
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(text)
                         .setBigContentTitle(title)
-                        .setSummaryText("Dummy summary text"))
+                        .setSummaryText("New sample added"))
 
                 // Example additional actions for this notification. These will
                 // only show on devices running Android 4.1 or later, so you

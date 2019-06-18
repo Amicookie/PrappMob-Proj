@@ -48,11 +48,6 @@ public class Sensor {
 
     @Override
     public String toString() {
-        return "Sensor{" +
-                "sensor_id=" + sensor_id +
-                ", sensor_name='" + sensor_name + '\'' +
-                ", sensor_description='" + sensor_description + '\'' +
-                ", station_id=" + station_id +
-                '}';
+        return sensor_name;
     }
 }

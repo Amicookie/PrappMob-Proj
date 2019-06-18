@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +14,9 @@ import android.util.Log;
 import com.example.prappmobcorrectviews.Classes.DatabaseClasses.Sample;
 import com.example.prappmobcorrectviews.Classes.DatabaseClasses.Sensor;
 import com.example.prappmobcorrectviews.Classes.DatabaseClasses.Workstation;
+import com.example.prappmobcorrectviews.Fragments.FilteredDataFragment;
+import com.example.prappmobcorrectviews.Fragments.NoDataFragment;
+import com.example.prappmobcorrectviews.R;
 
 import org.json.JSONArray;
 
@@ -24,19 +29,26 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class SplashActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
+    private WebServiceHandler webServiceHandler;
 
     public static List<Workstation> workstationList;
     public static List<Sensor> sensorList;
     public static List<Sample> sampleList;
 
-    public static final String url = "http://192.168.43.160:5000";
+    public static boolean isDataDownloadedFromServer;
+
+    public static final String url = "http://192.168.1.13:5000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +71,7 @@ public class SplashActivity extends AppCompatActivity {
             //Set the dialog title to 'Loading...'
             progressDialog.setTitle("Loading...");
             //Set the dialog message to 'Loading application View, please wait...'
-            progressDialog.setMessage("Loading application View, please wait...");
+            progressDialog.setMessage("Loading application, please wait...");
             //This dialog can't be canceled by pressing the back key
             progressDialog.setCancelable(false);
             //This dialog isn't indeterminate
@@ -74,7 +86,8 @@ public class SplashActivity extends AppCompatActivity {
 //                .setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
-            new WebServiceHandler().execute(url+"/workstations", url+"/sensors", url+"/samples");
+            webServiceHandler = new WebServiceHandler();
+            webServiceHandler.execute(url+"/workstations", url+"/sensors", url+"/samples");
 //
 //                    }
 //                });
@@ -98,7 +111,7 @@ public class SplashActivity extends AppCompatActivity {
                     //Initialize an integer (that will act as a counter) to zero
                     int counter = 0;
                     //While the counter is smaller than four
-                    while(counter <= 4)
+                    while(webServiceHandler.getStatus() != Status.FINISHED)
                     {
                         //Wait 850 milliseconds
                         this.wait(1000);
@@ -106,7 +119,7 @@ public class SplashActivity extends AppCompatActivity {
                         counter++;
                         //Set the current progress.
                         //This value is going to be passed to the onProgressUpdate() method.
-                        publishProgress(counter*25);
+                        publishProgress(counter);
                     }
 
                 }
@@ -167,9 +180,9 @@ public class SplashActivity extends AppCompatActivity {
 
                 List<String> jsonArrayPrep = new ArrayList<>();
 
-                for (int i = 0; i < urls.length; i++) {
+                for (String url1 : urls) {
                     // 1st url = workstations
-                    URL url = new URL(urls[i]);
+                    URL url = new URL(url1);
                     URLConnection connection = url.openConnection();
 
                     // pobranie danych do InputStream
@@ -200,6 +213,7 @@ public class SplashActivity extends AppCompatActivity {
                 // obsłuż wyjątek
                 Log.d(MainActivity.class.getSimpleName(), e.toString());
                 Log.d(MainActivity.class.getSimpleName(), "wyjatek doInBackground");
+                isDataDownloadedFromServer = false;
                 return null;
             }
 
@@ -244,21 +258,27 @@ public class SplashActivity extends AppCompatActivity {
                             jsonSensor.getJSONObject(j).optInt("station_id")));
                 }
 
+
+                // aFormat: "E',' dd M yyyy HH:mm:ss z" "yyyy-MM-ddTHH:mm"
                 for (int j = 0; j < jsonSample.length(); j++) {
                     System.out.println(jsonSample.getJSONObject(j).toString());
                     sampleList.add(new Sample(jsonSample.getJSONObject(j).optInt("sample_id"),
                             (Double) jsonSample.getJSONObject(j).opt("value"),
-                            stringToDate(jsonSample.getJSONObject(j).optString("timestamp"),"E',' dd M yyyy HH:mm:ss z"),
-                            jsonSample.getJSONObject(j).optInt("sample_id")));
+                            stringToDate(jsonSample.getJSONObject(j).optString("timestamp")),
+                            jsonSample.getJSONObject(j).optInt("sensor_id")));
 
                    // Log.d("timestamp", sampleList.get(0).getTimestamp().toString());
                 }
 
+                isDataDownloadedFromServer = true;
 
             } catch (Exception e) {
                 // obsłuż wyjątek
                 Log.d(MainActivity.class.getSimpleName(), e.toString());
                 Log.d(MainActivity.class.getSimpleName(), "wyjatek onPostExec");
+
+                isDataDownloadedFromServer = false;
+
 
             }
         }
@@ -290,14 +310,26 @@ public class SplashActivity extends AppCompatActivity {
     }
 
 
-    private Date stringToDate(String aDate,String aFormat) {
+//    private Date stringToDate(String aDate, String aFormat) {
+//
+//        if(aDate==null) return null;
+//
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(aFormat, Locale.UK);
+//        LocalDateTime localDateTime = LocalDateTime.parse(aDate, formatter);
+//
+//        ParsePosition pos = new ParsePosition(0);
+//        SimpleDateFormat simpledateformat = new SimpleDateFormat(aFormat);
+//        Date stringDate = simpledateformat.parse(aDate, pos);
+//        return stringDate;
+//
+//    }
 
-        if(aDate==null) return null;
-        ParsePosition pos = new ParsePosition(0);
-        SimpleDateFormat simpledateformat = new SimpleDateFormat(aFormat);
-        Date stringDate = simpledateformat.parse(aDate, pos);
-        return stringDate;
+    public static LocalDateTime stringToDate(String aDate){
 
+        String aFormat = "yyyy-MM-dd'T'HH:mm";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(aFormat, Locale.UK);
+
+        return LocalDateTime.parse(aDate, formatter);
     }
 }
 

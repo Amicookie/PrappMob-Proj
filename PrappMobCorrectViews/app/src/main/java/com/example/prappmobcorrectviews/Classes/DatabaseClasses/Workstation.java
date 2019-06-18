@@ -36,5 +36,9 @@ public class Workstation {
         this.station_description = station_description;
     }
 
+    @Override
+    public String toString() {
+        return station_name;
+    }
 
 }

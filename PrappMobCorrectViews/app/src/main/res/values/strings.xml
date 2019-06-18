@@ -9,16 +9,10 @@
     <string name="save_sample_button">Add new sample!</string>
     <string name="back_button">Back</string>
 
-    <string name="new_sample_added_notification_title_template">New sample added: %1$s</string>
+    <string name="new_sample_added_notification_title">New sample added: %1$s</string>
 
     <!-- TODO: remove this placeholder text -->
-    <string name="new_sample_added_notification_placeholder_text_template">You said %1$s and lorem
-        ipsum dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit
-        vel semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
-        Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper
-        ornare lacus. Duis ac mauris sed massa congue volutpat. Donec sed erat sit amet turpis
-        viverra rhoncus sit amet nec magna. Donec lacinia ligula at libero volutpat volutpat nec nec
-        tortor.
+    <string name="new_sample_added_notification_text">Sample %1$s added to Sensor %2$s!
     </string>
 
     <string name="action_share">Share</string>
@@ -32,6 +26,10 @@
     <string name="enter_lab_label">Enter Lab</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="data_was_not_found">Data was not found.</string>
+    <string name="alertValue">Value is required.</string>
+    <string name="alertTimestamp">If null, timestamp will be set to current date.</string>
+    <string name="add_sample">Add sample</string>
 
 
 </resources>
